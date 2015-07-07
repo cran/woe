@@ -1,6 +1,5 @@
-6e3cf24d13a135c64dd74b2ad6857cb2 *DESCRIPTION
+3dc46dd31767b6b65e6a2de887369ef1 *DESCRIPTION
 d13815dd6d9408a0b2aca03df0a789ec *NAMESPACE
-fd62d9ff5e82b9af1f77a659682570a5 *R/woe.R
-2c811fb3562464034a211b37c6a4e701 *inst/tests/Rplots.pdf
-e170697a0a67a3f228a7d90b65b805ff *inst/tests/testwoe.R
-b7f11e3c66db1d2382b535fcc030dd1e *man/woe.Rd
+0761c2408e98e8d713cff21dceed3179 *R/woe.R
+1d022497ea521706c95ab53679f359fc *inst/tests/testwoe.R
+4301f65b1d570e400d64118481dd9e20 *man/woe.Rd

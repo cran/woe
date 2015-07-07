@@ -1,7 +1,7 @@
 Package: woe
 Type: Package
 Title: Computes Weight of Evidence and Information Values
-Version: 0.1
+Version: 0.2
 Date: 2015-07-07
 Author: Sudarson Mothilal Thoppay <sudarson@outlook.com>
 Maintainer: Sudarson Mothilal Thoppay <sudarson@outlook.com>
@@ -9,6 +9,6 @@ Description: Shows the relationship between an independent and dependent variabl
 Depends: R (>= 3.1.0)
 License: GPL-2
 Repository: CRAN
-Packaged: 2015-07-13 12:40:07 UTC; Muruga
+Packaged: 2015-07-28 17:55:30 UTC; Muruga
 NeedsCompilation: no
-Date/Publication: 2015-07-14 15:57:08
+Date/Publication: 2015-07-28 23:41:30

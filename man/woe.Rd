@@ -4,7 +4,7 @@
 \alias{woe}
 \title{Weigth of Evidence}
 \usage{
-woe(Data, Independent, Continuous, Dependent, C_Bin)
+woe(Data, Independent, Continuous, Dependent, C_Bin, Bad, Good)
 }
 \arguments{
 \item{Data}{: Name of Data Set}
@@ -16,9 +16,13 @@ woe(Data, Independent, Continuous, Dependent, C_Bin)
 \item{Dependent}{: Name of the Targer Variable}
 
 \item{C_Bin}{: Count of Bins to be computed}
+
+\item{Bad}{: Which categorical variable do you want to be bad}
+
+\item{Good}{: Which categorical variable do you want to be good}
 }
 \value{
-returns a DataSet with computed WoE and IV values on success or 0 on Failure
+Returns a DataSet with computed WoE and IV values on success or 0 on Failure
 }
 \description{
 Computes the Weight of Evidence and Information Value between Dependent and Independent variable.
@@ -26,9 +30,20 @@ Computes the Weight of Evidence and Information Value between Dependent and Inde
 \details{
 WOE
 }
+\note{
+"woe" shows the log-odds ratio between between Goods and Bads.
+In the Bivalued Dependenet variable, one value represents Goods and others are bads.
+In Detail with an Example:
+Let Dependent varaible be ATTRITED (0,1) and Independent variable be TENURE
+where, 1-Attrited, 0-Non Attrited.
+If I wish to check WOE and IV of Tenure with ATTRITED to know if Tenure has an effect in getting attrited,
+Then good would be 1 and bad=0.
+If I wish to check WOE and IV of Tenure with ATTRITED to know if Tenure has an effect in not getting attrited,
+Then good would be 0 and bad=1.
+}
 \examples{
-woe(mtcars,"cyl",FALSE,"am",10)
-woe(mtcars,"mpg",TRUE,"am",10)
+woe(Data=mtcars,"cyl",FALSE,"am",10,Bad=0,Good=1)
+woe(Data=mtcars,"mpg",TRUE,"am",10,Bad=0,Good=1)
 }
 \author{
 Sudarson Mothilal Thoppay

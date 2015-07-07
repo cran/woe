@@ -13,15 +13,27 @@
 #' @param Continuous : True if the variable is continuous, False if variable is Ordinal or Nominal
 #' @param Dependent : Name of the Targer Variable
 #' @param C_Bin : Count of Bins to be computed
-#' @return returns a DataSet with computed WoE and IV values on success or 0 on Failure
+#' @param Good : Which categorical variable do you want to be good
+#' @param Bad : Which categorical variable do you want to be bad
+#' @return Returns a DataSet with computed WoE and IV values on success or 0 on Failure
+#' @note
+#' "woe" shows the log-odds ratio between between Goods and Bads.
+#' In the Bivalued Dependenet variable, one value represents Goods and others are bads.
+#' In Detail with an Example:
+#' Let Dependent varaible be ATTRITED (0,1) and Independent variable be TENURE
+#' where, 1-Attrited, 0-Non Attrited.
+#' If I wish to check WOE and IV of Tenure with ATTRITED to know if Tenure has an effect in getting attrited,
+#' Then good would be 1 and bad=0.
+#' If I wish to check WOE and IV of Tenure with ATTRITED to know if Tenure has an effect in not getting attrited,
+#' Then good would be 0 and bad=1.
 #' @examples
-#' woe(mtcars,"cyl",FALSE,"am",10)
-#' woe(mtcars,"mpg",TRUE,"am",10)
+#' woe(Data=mtcars,"cyl",FALSE,"am",10,Bad=0,Good=1)
+#' woe(Data=mtcars,"mpg",TRUE,"am",10,Bad=0,Good=1)
 #'
 #' @export
 
 
-woe<-function(Data,Independent,Continuous,Dependent,C_Bin)
+woe<-function(Data,Independent,Continuous,Dependent,C_Bin,Bad,Good)
 {
   continuous=Continuous
   C_Bin=C_Bin-1
@@ -53,13 +65,19 @@ woe<-function(Data,Independent,Continuous,Dependent,C_Bin)
   if(success==1 & success2==1)
   {
     CNO_Target=i
+    Data[which(Data[,CNO_Target]==Bad),CNO_Target]=0
+    Data[which(Data[,CNO_Target]==Good),CNO_Target]=1
+
     if(Continuous==TRUE)
     {
       BIN<-.sub_woe(Data,Ind,CNO_Target,C_Bin)
+      colnames(BIN)<-c("BIN","MIN","MAX","GOOD","BAD","TOTAL","BAD%","GOOD%","TOTAL%","WOE","IV","BAD_SPLIT","GOOD_SPLIT")
+      BIN<-BIN[,c(1,2,3,5,4,6,7,8,9,10,11,12,13)]
     }
     else
     {
       BIN<-.sub_woe_ON(Data,Ind,CNO_Target,C_Bin)
+      colnames(BIN)<-c("BIN","BAD","GOOD","TOTAL","BAD%","GOOD%","TOTAL%","WOE","IV","BAD_SPLIT","GOOD_SPLIT")
     }
     return(BIN)
   }
@@ -160,7 +178,7 @@ woe<-function(Data,Independent,Continuous,Dependent,C_Bin)
 
   }
 
-
+  BIN<-BIN[,c(1,2,3,5,6,7,9,10,11,12,13,14,15)]
   return(BIN)
 }
 
